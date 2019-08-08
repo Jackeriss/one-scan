@@ -1,0 +1,7 @@
+.DS_Store
+.vscode
+__pycache__
+*.pyc
+node_modules
+dist
+app/config/config.local.yaml
