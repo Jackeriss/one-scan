@@ -7,6 +7,7 @@ import aiotask_context
 from app.util.time_util import timeout_log
 from app.util.cache_util import local_cache
 
+
 class IndexService(object):
     """ 包括协程上下文、超时日志和本地缓存等示例 """
 
@@ -15,7 +16,7 @@ class IndexService(object):
         time.sleep(5)
         area = length * width
         return area
-    
+
     @classmethod
     # @timeout_log(timeout=4, tag="Index")
     # @local_cache(expire=3)

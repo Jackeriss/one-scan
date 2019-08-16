@@ -30,7 +30,6 @@ def list_parse(str_param, format_type=int):
 
 
 def validate_enum_type(enum_type):
-
     def _wrap(param):
         try:
             return enum_type(param)
@@ -42,4 +41,7 @@ def validate_enum_type(enum_type):
 
 def email_schema():
     """ 校验邮箱合法性 """
-    return Regex(r"^[a-zA-Z0-9_.-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$", error="Please enter a valid email.")
+    return Regex(
+        r"^[a-zA-Z0-9_.-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$",
+        error="Please enter a valid email.",
+    )

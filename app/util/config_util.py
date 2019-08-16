@@ -56,6 +56,10 @@ class Config:
         return self._config["server"]
 
     @property
+    def http(self):
+        return self._config["http"]
+
+    @property
     def redis(self):
         conf = copy.deepcopy(self._config['redis'])
         address = (conf.pop('host', 'localhost'), conf.pop('port', 6379))

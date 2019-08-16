@@ -3,6 +3,9 @@ import functools
 import logging
 
 import aiohttp
+import orjson
+
+from app.util.config_util import config
 
 
 def as_asyncio_task(func):
@@ -27,7 +30,7 @@ class HTTPClient:
         return cls._session
 
     @as_asyncio_task
-    async def request(self, url, *, method="GET", format=None, timeout=3, retry=3, **kwargs):
+    async def request(self, url, *, method="GET", format=None, timeout=config.http["timeout"], retry=config.http["retry"], **kwargs):
         session = await self.get_session()
         func = getattr(session, method.lower())
         logging.debug(f"url: {url} params: {kwargs}")
@@ -38,10 +41,9 @@ class HTTPClient:
                 response = await func(url, timeout=timeout, **kwargs)
                 response.text_data = await response.text()
                 if format == "json":
-                    response.json_data = await response.json(content_type=None)
+                    response.json_data = await orjson.loads(response.text_data)
             except asyncio.TimeoutError:
-                logging.error(
-                    f"request timeout {timeout}!request url:{url} kwargs:{kwargs}")
+                logging.error(f"request timeout {timeout}!request url:{url} kwargs:{kwargs}")
                 break
             except Exception as exception:
                 logging.exception("request failed. retry#{}\nurl:{}\nargs:{}\nresponse:{}\nexception:{}".format(

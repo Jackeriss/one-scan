@@ -6,6 +6,10 @@ server:
   allow_origin: "*"
   thread_worker: 60
 
+http:
+  timeout: 3
+  retry: 3
+
 redis:
   host: "127.0.0.1"
   port: 6379

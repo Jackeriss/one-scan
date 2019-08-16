@@ -62,7 +62,6 @@ def timeout_log(timeout=10, tag="", debug=False):
     """
 
     def decorator(func):
-
         def _time_log(time_start, time_end, function_name):
             if not debug and config.server["debug"]:
                 return
@@ -76,14 +75,14 @@ def timeout_log(timeout=10, tag="", debug=False):
             result = await func(*args, **kwargs)
             _time_log(start, now(), func.__name__)
             return result
-        
+
         @functools.wraps(func)
         def _sync_wrapper(*args, **kwargs):
             start = now()
             result = func(*args, **kwargs)
             _time_log(start, now(), func.__name__)
             return result
-        
+
         if asyncio.iscoroutinefunction(func):
             return _async_wrapper
         else:

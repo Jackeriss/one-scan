@@ -11,6 +11,7 @@ restart = "./app.sh restart"
 log = "./app.sh log"
 
 [dev-packages]
+black = "*"
 
 [packages]
 tornado = "*"
@@ -26,3 +27,6 @@ aiohttp = "*"
 
 [requires]
 python_version = "3.7"
+
+[pipenv]
+allow_prereleases = true
