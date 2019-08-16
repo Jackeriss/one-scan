@@ -1,5 +1,5 @@
 #!/bin/bash
-PROJECT_NAME="template-tornado"
+PROJECT_NAME="website-scanner"
 LOG_DIR=/app/log/${PROJECT_NAME}
 
 NOTICE_ENV="Can not load ${ENV} from system, only (dev, test, pre, prod) is available"

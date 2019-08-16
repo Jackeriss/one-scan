@@ -5,6 +5,7 @@ server:
   port: 8000
   allow_origin: "*"
   thread_worker: 60
+  requests_cache: 60
 
 http:
   timeout: 3

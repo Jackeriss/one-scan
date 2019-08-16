@@ -7,6 +7,7 @@ from tornado.log import enable_pretty_logging
 from tornado.platform.asyncio import AsyncIOMainLoop
 from tornado.process import fork_processes
 from tornado.netutil import bind_sockets
+import requests_cache
 
 from app import application, router
 from app.hook import before_hook, after_hook
@@ -41,6 +42,7 @@ MODEL_ROUTERS = [{"routers": router.ROUTERS, "prefix": ""}]
 
 
 def main():
+    requests_cache.install_cache("requests_cache", expire_after=config.server["requests_cache"])
     settings = config.server
     settings["static_path"] = config.static_path
     settings["template_path"] = config.template_path

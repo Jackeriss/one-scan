@@ -18,5 +18,5 @@ class HTTPCode(IntEnum):
 
 
 class PluginType(StrEnum):
-    SCANNER = "scanner_plugin"
-    WAF = "waf_plugin"
+    ASYNC_SCANNER = "async_scanner"
+    SYNC_SCANNER = "sync_scanner"
