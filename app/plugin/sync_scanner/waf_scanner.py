@@ -4,7 +4,7 @@ from wafw00f.lib.evillib import oururlparse
 
 
 __plugin__ = "WAF 扫描器"
-SEQUENCE = 3
+SEQUENCE = 5
 
 
 def run(url):

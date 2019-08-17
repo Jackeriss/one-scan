@@ -1,4 +1,4 @@
-""" 扫描 HTTPS 证书相关信息 """
+""" 扫描 SSL 证书相关信息 """
 from datetime import datetime
 
 from sslyze.server_connectivity_tester import ServerConnectivityTester
@@ -11,8 +11,8 @@ from sslyze.plugins.heartbleed_plugin import HeartbleedScanCommand
 from app.util.config_util import config
 
 
-__plugin__ = "HTTPS 扫描器"
-SEQUENCE = 2
+__plugin__ = "SSL 扫描器"
+SEQUENCE = 3
 
 
 ATS_CIPHER_SET = (

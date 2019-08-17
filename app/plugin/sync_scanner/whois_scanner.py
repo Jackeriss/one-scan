@@ -3,7 +3,7 @@ import whois
 
 
 __plugin__ = "WHOIS 扫描器"
-SEQUENCE = 5
+SEQUENCE = 2
 
 
 NOT_FOUND = "未检测到"
