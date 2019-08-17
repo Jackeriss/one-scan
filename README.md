@@ -10,5 +10,3 @@ WHOIS 扫描器：基于 [python-whois](https://github.com/joepie91/python-whois
 SSL 扫描器：基于 [sslyze](https://github.com/nabla-c0d3/sslyze) 实现  
 指纹扫描器：基于 [Wappalyzer](https://github.com/AliasIO/Wappalyzer) 实现  
 WAF 扫描器：基于 [wafw00f](https://github.com/EnableSecurity/wafw00f) 实现  
-
-
