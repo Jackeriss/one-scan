@@ -130,7 +130,7 @@ class BasicHandler(tornado.web.RequestHandler):
         return self.finish(orjson.dumps(response))
 
     def page(self, template, **kwargs):
-        return self.render(os.path.join(config.env, template), **kwargs)
+        return self.render(os.path.join("dist", template) if config.env != "dev" else template, **kwargs)
 
     def write_error(self, status_code, **kwargs):
         self.error(status_code)
@@ -144,7 +144,7 @@ class PageNotFoundHandler(BasicHandler):
     """ 404 页面 handler """
 
     def get(self):
-        return self.error(error_util.ERROR_CODE.NOT_FOUND)
+        self.render_error(const_config.HTTPCode.NOT_FOUND)
 
     def post(self):
         return self.error(error_util.ERROR_CODE.NOT_FOUND)
@@ -169,5 +169,4 @@ def set_context(func, *args, **kwargs):
 
     if asyncio.iscoroutinefunction(func):
         return _async_wrapper
-    else:
-        return _sync_wrapper
+    return _sync_wrapper

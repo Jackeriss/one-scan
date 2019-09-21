@@ -1,0 +1,19 @@
+{% extends base.html %}
+{% block title %}
+{% if status_code == 404 %}
+404 Not Found - One Scan
+{% else %}
+500 System Error - One Scan
+{% end %}
+{% end %}
+{% block section %}
+<div>
+  {% if status_code == 404 %}
+  <h3>404</h3>
+  <p>Not Found</p>
+  {% else %}
+  <h3>500</h3>
+  <p>System Error</p>
+  {% end %}
+</div>
+{% end %}

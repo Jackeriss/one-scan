@@ -2,62 +2,44 @@ import tldextract
 import whois
 
 
-__plugin__ = "WHOIS 扫描器"
-SEQUENCE = 2
+__plugin__ = "WHOIS Scanner"
+SEQUENCE = 3
 
 
-NOT_FOUND = "未检测到"
+NOT_FOUND = "Unknown"
 
 
 def run(url):
-    scan_result = {
-        "name": __plugin__,
-        "sequence": SEQUENCE,
-        "result": [],
-    }
-    error_result = {
-        "name": __plugin__,
-        "sequence": SEQUENCE,
-        "result": [],
-    }
-    error_result["result"] = [{"name": "错误", "result": f"{__plugin__}无法扫描该网站"}]
+    scan_result = {"name": __plugin__, "sequence": SEQUENCE, "result": []}
+    error_result = {"name": __plugin__, "sequence": SEQUENCE, "result": []}
+    error_result["result"] = [
+        {"name": "Error", "result": [{"name": f"{__plugin__} can't scan this website"}]}
+    ]
     result_map = {
-        "name": {"name": "注册者", "sequence": 0, "result": []},
-        "emails": {"name": "邮箱", "sequence": 1, "result": []},
-        "registrar": {"name": "域名注册商", "sequence": 2, "result": []},
-        "name_servers": {"name": "NS 域名服务器", "sequence": 3, "result": []},
-        "dnssec": {"name": "域名系统安全扩展", "sequence": 4, "result": []},
-        "creation_date": {"name": "创建日期", "sequence": 5, "result": []},
-        "expiration_date": {"name": "过期日期", "sequence": 6, "result": []},
+        "name": {"name": "Name", "sequence": 0, "result": []},
+        "registrar": {"name": "Registrar", "sequence": 1, "result": []},
+        "emails": {"name": "Emails", "sequence": 2, "result": []},
+        "dnssec": {"name": "DNSSEC", "sequence": 3, "result": []},
+        "creation_date": {"name": "Creation date", "sequence": 4, "result": []},
+        "expiration_date": {"name": "Expiration date", "sequence": 5, "result": []},
     }
 
     try:
         registered_domain = tldextract.extract(url.netloc).registered_domain
         if not registered_domain:
             return error_result
-        domain = whois.whois(registered_domain)
-        result_map["name"]["result"] = [
-            {"name": domain.name if domain.name else NOT_FOUND}
-        ]
-        result_map["emails"]["result"] = [
-            {"name": domain.emails if domain.emails else NOT_FOUND}
-        ]
-        result_map["registrar"]["result"] = [
-            {"name": domain.registrar if domain.registrar else NOT_FOUND}
-        ]
-        result_map["name_servers"]["result"] = [
-            {"name": domain.name_servers if domain.name_servers else NOT_FOUND}
-        ]
-        result_map["dnssec"]["result"] = [
-            {"name": domain.dnssec if domain.dnssec else NOT_FOUND}
-        ]
+        domain = whois.whois(registered_domain, command=True)
+        result_map["name"]["result"] = [{"name": domain.name or NOT_FOUND}]
+        result_map["emails"]["result"] = [{"name": domain.emails or NOT_FOUND}]
+        result_map["registrar"]["result"] = [{"name": domain.registrar or NOT_FOUND}]
+        result_map["dnssec"]["result"] = [{"name": domain.dnssec or NOT_FOUND}]
         if isinstance(domain.creation_date, list):
             result_map["creation_date"]["result"] = [
                 {"name": domain.creation_date[0] if domain.creation_date else NOT_FOUND}
             ]
         else:
             result_map["creation_date"]["result"] = [
-                {"name": domain.creation_date if domain.creation_date else NOT_FOUND}
+                {"name": domain.creation_date or NOT_FOUND}
             ]
         if isinstance(domain.expiration_date, list):
             result_map["expiration_date"]["result"] = [
@@ -76,7 +58,12 @@ def run(url):
                 }
             ]
     except:
-        scan_result["result"] = [{"name": "错误", "result": f"{__plugin__}无法连接该网站"}]
+        scan_result["result"] = [
+            {
+                "name": "Error",
+                "result": [{"name": f"{__plugin__} can't scan this website"}],
+            }
+        ]
         return scan_result
 
     scan_result["result"] = sorted(

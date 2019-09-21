@@ -57,7 +57,7 @@ def now():
 
 def timeout_log(timeout=10, tag="", debug=False):
     """ 记录函数执行时间
-        timeout: 超过时长打印错误日志，单位（秒）
+        timeout: 超过时长打印Error日志，单位（秒）
         tag: 日志记录标签
     """
 
@@ -85,7 +85,6 @@ def timeout_log(timeout=10, tag="", debug=False):
 
         if asyncio.iscoroutinefunction(func):
             return _async_wrapper
-        else:
-            return _sync_wrapper
+        return _sync_wrapper
 
     return decorator

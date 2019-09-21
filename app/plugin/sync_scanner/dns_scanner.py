@@ -1,4 +1,3 @@
-""" 扫描 DNS 解析服务商 """
 import re
 
 import dns.resolver
@@ -7,7 +6,7 @@ import tldextract
 from app.plugin.data.dns_provider import DNS_PROVIDER
 
 
-__plugin__ = "DNS 扫描器"
+__plugin__ = "DNS Scanner"
 SEQUENCE = 1
 
 
@@ -17,21 +16,16 @@ RESOLVER_LIFETIME = 8
 
 
 def run(url):
-    scan_result = {
-        "name": __plugin__,
-        "sequence": SEQUENCE,
-        "result": [],
+    scan_result = {"name": __plugin__, "sequence": SEQUENCE, "result": []}
+    error_result = {"name": __plugin__, "sequence": SEQUENCE, "result": []}
+    error_result["result"] = [
+        {"name": "Error", "result": [{"name": f"{__plugin__} can't scan this website"}]}
+    ]
+    result_map = {
+        "providers": {"name": "DNS providers", "sequence": 0, "result": []},
+        "ns_server": {"name": "NS servers", "sequence": 1, "result": []},
     }
-    error_result = {
-        "name": __plugin__,
-        "sequence": SEQUENCE,
-        "result": [],
-    }
-    error_result["result"] = [{"name": "错误", "result": f"{__plugin__}无法扫描该网站"}]
-    result_map = {"providers": {"name": "DNS 解析服务商", "sequence": 0, "result": []}}
     providers = []
-    ns_domain_list = []
-    ns_ip_list = []
 
     try:
         registered_domain = tldextract.extract(url.netloc).registered_domain
@@ -41,24 +35,18 @@ def run(url):
         resolver.lifetime = RESOLVER_LIFETIME
         answers = resolver.query(registered_domain, rdtype=dns.rdatatype.NS)
         for answer in answers:
-            ns_domain_list.append(answer.to_text())
+            result_map["ns_server"]["result"].append(answer.to_text())
     except dns.resolver.Timeout:
-        error_result["result"][0]["result"] = f"{__plugin__}查询超时"
+        error_result["result"][0]["result"] = f"{__plugin__} scan timeout"
         return error_result
     except:
         return error_result
 
-    for ns_domain in ns_domain_list:
-        added = False
+    for ns_server in result_map["ns_server"]["result"]:
         for dns_provider in DNS_PROVIDER:
-            if re.search(f"\\.{dns_provider}", ns_domain):
+            if re.search(f"\\.{dns_provider}", ns_server):
                 providers.append(DNS_PROVIDER[dns_provider])
-                added = True
-        if not added:
-            providers.append(ns_domain)
-
-    providers = list(set(providers))
-    result_map["providers"]["result"] = providers
+    result_map["providers"]["result"] = list(set(providers)) if providers else ["Unknown"]
     for result in result_map.values():
         result["result"] = [{"name": item} for item in result["result"]]
     scan_result["result"] = sorted(

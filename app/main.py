@@ -42,7 +42,9 @@ MODEL_ROUTERS = [{"routers": router.ROUTERS, "prefix": ""}]
 
 
 def main():
-    requests_cache.install_cache("requests_cache", expire_after=config.server["requests_cache"])
+    requests_cache.install_cache(
+        "requests_cache", expire_after=config.server["requests_cache"]
+    )
     settings = config.server
     settings["static_path"] = config.static_path
     settings["template_path"] = config.template_path
@@ -75,7 +77,7 @@ def main():
     app.start_delay_tasks()
     server = httpserver.HTTPServer(app)
     server.add_sockets(sockets)
-    logging.debug("🚀 Server ready at http://{}:{}".format(address, port))
+    logging.debug(f"🚀 Server ready at http://{address}:{port}")
     loop.run_forever()
 
 

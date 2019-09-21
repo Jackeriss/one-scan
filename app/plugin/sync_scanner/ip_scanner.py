@@ -1,24 +1,23 @@
-""" 扫描服务器 IP ASN 等信息 """
 import re
 
 import dns.resolver
 from ipwhois import IPWhois
 
 
-__plugin__ = "IP WHOIS 扫描器"
+__plugin__ = "IP Scanner"
 SEQUENCE = 0
 
 
 RESOLVER_NAMESERVERS = ["223.5.5.5", "1.1.1.1", "114.114.114.114"]
 RESOLVER_TIMEOUT = 2
 RESOLVER_LIFETIME = 8
-NOT_FOUND = "未检测到"
+NOT_FOUND = "Unknown"
 
 
 def run(url):
     scan_result = {"name": __plugin__, "sequence": SEQUENCE, "result": {}}
     error_result = {"name": __plugin__, "sequence": SEQUENCE, "result": []}
-    error_result["result"] = [{"name": "错误", "result": f"{__plugin__}无法扫描该网站"}]
+    error_result["result"] = [{"name": "Error", "result": [{"name": f"{__plugin__} can't scan this website"}]}]
     host_ip_list = []
 
     try:
@@ -32,7 +31,7 @@ def run(url):
         for answer in answers:
             host_ip_list.append(answer.to_text())
     except dns.resolver.Timeout:
-        error_result["result"][0]["result"] = f"{__plugin__}查询超时"
+        error_result["result"][0]["result"] = f"{__plugin__}scan timeout"
         return error_result
     except:
         return error_result
@@ -44,13 +43,13 @@ def run(url):
 
     for host_ip in host_ip_list:
         result_map = {
-            "asn_code": {"name": "ASN 编号", "sequence": 0, "result": []},
-            "asn_description": {"name": "ASN 描述", "sequence": 1, "result": []},
-            "asn_country_code": {"name": "ASN 国家码", "sequence": 2, "result": []},
+            "asn_code": {"name": "ASN code", "sequence": 0, "result": []},
+            "asn_description": {"name": "ASN description", "sequence": 1, "result": []},
+            "asn_country_code": {"name": "ASN country code", "sequence": 2, "result": []},
             "asn_cidr": {"name": "ASN CIDR", "sequence": 3, "result": []},
-            "asn_registry": {"name": "ASN 注册地", "sequence": 4, "result": []},
-            "asn_date": {"name": "ASN 分配时间", "sequence": 5, "result": []},
-            "ip_version": {"name": "IP 版本", "sequence": 6, "result": []},
+            "asn_registry": {"name": "ASN registry", "sequence": 4, "result": []},
+            "asn_date": {"name": "ASN date", "sequence": 5, "result": []},
+            "ip_version": {"name": "IP version", "sequence": 6, "result": []},
         }
         try:
             ip_whois = IPWhois(host_ip)

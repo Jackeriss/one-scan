@@ -9,12 +9,12 @@ from bs4 import BeautifulSoup
 from app.util.config_util import config
 
 
-__plugin__ = "指纹扫描器"
-SEQUENCE = 4
+__plugin__ = "Technology Scanner"
+SEQUENCE = 5
 
 
 APP_FILE_PATH = os.path.join(config.base_dir, "plugin", "data", "apps.json")
-TIMEOUT = 3
+DEFAULT_ICON_IMAGE = ""
 
 
 class WebPage(object):
@@ -69,7 +69,7 @@ class WebPage(object):
         url : str
         timeout: int
         """
-        response = requests.get(url, verify=True, timeout=timeout)
+        response = requests.get(url, verify=False, timeout=timeout)
         return cls.new_from_response(response)
 
     @classmethod
@@ -271,7 +271,7 @@ class Wappalyzer(object):
         for app_name in detected_apps:
             app_result = {
                 "name": app_name,
-                "image": self.apps.get(app_name, {}).get("icon", ""),
+                "image": self.apps.get(app_name, {}).get("icon", DEFAULT_ICON_IMAGE),
                 "url": self.apps.get(app_name, {}).get("website", ""),
             }
             categories = self.get_categories(app_name)
@@ -290,21 +290,14 @@ SCANNER = Wappalyzer.latest(apps_file=APP_FILE_PATH)
 
 
 def run(url):
-    scan_result = {
-        "name": __plugin__,
-        "sequence": SEQUENCE,
-        "result": [],
-    }
-    error_result = {
-        "name": __plugin__,
-        "sequence": SEQUENCE,
-        "result": [],
-    }
-    error_result["result"] = [{"name": "错误", "result": f"{__plugin__}无法扫描该网站"}]
+    scan_result = {"name": __plugin__, "sequence": SEQUENCE, "result": []}
+    error_result = {"name": __plugin__, "sequence": SEQUENCE, "result": []}
+    error_result["result"] = [{"name": "Error", "result": [{"name": f"{__plugin__} can't scan this website"}]}]
 
+    webpage = WebPage.new_from_url(url.geturl(), timeout=config.http["timeout"])
     try:
-        webpage = WebPage.new_from_url(url.geturl(), timeout=TIMEOUT)
-        result_map = SCANNER.analyze_with_categories(webpage)
+        webpage = WebPage.new_from_url(url.geturl(), timeout=config.http["timeout"])
+        result_map = SCANNER.analyze_with_categories(webpage) or {"": {"name": "Technology", "sequence": 0, "result": [{"name": "Unknown"}]}}
     except:
         return error_result
 

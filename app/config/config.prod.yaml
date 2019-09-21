@@ -3,13 +3,13 @@ server:
   debug: false
   host: 0.0.0.0
   port: 10002
-  allow_origin: "*"
+  allow_origin: "*.jackeriss.com"
   thread_worker: 60
   requests_cache: 60
 
 http:
-  timeout: 3
-  retry: 3
+  timeout: 5
+  retry: 2
 
 redis:
   host: "127.0.0.1"

@@ -1,12 +1,18 @@
-# website-scanner
-一个支持插件扩展的网站信息扫描器。
+[![One Scan](https://i.loli.net/2019/09/15/HCJedBqkxciNDUw.png)](https://one-scan.jackeriss.com)
 
-Powered by [template-tornado](https://github.com/Jackeriss/template-tornado)
 
-## 扫描器插件列表
-IP WHOIS 扫描器：基于 [ipwhois](https://github.com/secynic/ipwhois) 实现  
-DNS 扫描器：基于 [dnspython](https://github.com/rthalley/dnspython) 实现  
-WHOIS 扫描器：基于 [python-whois](https://github.com/joepie91/python-whois) 实现  
-SSL 扫描器：基于 [sslyze](https://github.com/nabla-c0d3/sslyze) 实现  
-指纹扫描器：基于 [Wappalyzer](https://github.com/AliasIO/Wappalyzer) 实现  
-WAF 扫描器：基于 [wafw00f](https://github.com/EnableSecurity/wafw00f) 实现  
+> All in ONE website fingerprint scanner
+
+[![Generated from | template-tornado](https://img.shields.io/badge/Generated%20from-template--tornado-FF87D4?style=flat-square&logo=python&logoColor=FF87D4&labelColor=1F222A)](https://github.com/Jackeriss/template-tornado)
+
+## Plugins
+
+| Plugin name | Engine                                              |
+| --------------- | ------------------------------------------------------------ |
+| IP Scanner | [ipwhois](https://github.com/secynic/ipwhois)                |
+| DNS Scanner | [dnspython](https://github.com/rthalley/dnspython)           |
+| Subdomain Scanner | [virustotal](https://developers.virustotal.com/reference#domain-report) |
+| WHOIS Scanner | [pywhois](https://github.com/richardpenman/pywhois) |
+| SSL Scanner | [sslyze](https://github.com/nabla-c0d3/sslyze)               |
+| Technology Scanner | [Wappalyzer](https://github.com/AliasIO/Wappalyzer)          |
+| WAF Scanner | [wafw00f](https://github.com/EnableSecurity/wafw00f)         |

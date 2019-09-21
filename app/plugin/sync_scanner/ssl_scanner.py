@@ -1,4 +1,3 @@
-""" 扫描 SSL 证书相关信息 """
 from datetime import datetime
 
 from sslyze.server_connectivity_tester import ServerConnectivityTester
@@ -11,8 +10,8 @@ from sslyze.plugins.heartbleed_plugin import HeartbleedScanCommand
 from app.util.config_util import config
 
 
-__plugin__ = "SSL 扫描器"
-SEQUENCE = 3
+__plugin__ = "SSL Scanner"
+SEQUENCE = 4
 
 
 ATS_CIPHER_SET = (
@@ -41,22 +40,22 @@ def run(url):
         "sequence": SEQUENCE,
         "result": [],
     }
-    error_result["result"] = [{"name": "错误", "result": f"{__plugin__}无法扫描该网站"}]
+    error_result["result"] = [{"name": "Error", "result": [{"name": f"{__plugin__} can't scan this website"}]}]
     result_map = {
-        "https": {"name": "是否开启 HTTPS", "sequence": 0, "result": False},
-        "match": {"name": "证书是否与域名匹配", "sequence": 1, "result": False},
-        "signature": {"name": "签名是否安全（使用 SHA256）", "sequence": 2, "result": False},
-        "pub": {
-            "name": "公钥是否安全（ECDSA_256+ 或 RSA_2048+）",
-            "sequence": 3,
+        "https": {"name": "Enabled HTTPS", "sequence": 0, "result": False},
+        "effective": {"name": "Effective", "sequence": 1, "result": False},
+        "match": {"name": "Leaf certificate subject matches hostname", "sequence": 2, "result": False},
+        "signature": {"name": "Signature security (use SHA256)", "sequence": 3, "result": False},
+        "public": {
+            "name": "Public key security (use ECDSA_256+ or RSA_2048+)",
+            "sequence": 4,
             "result": False,
         },
-        "effective": {"name": "是否在有效期内", "sequence": 4, "result": False},
-        "tls1_2": {"name": "是否支持 TLS1.2", "sequence": 5, "result": False},
-        "pfs": {"name": "是否完全前向保密（PFS）", "sequence": 6, "result": False},
-        "ats": {"name": "是否遵循苹果 ATS 标准", "sequence": 7, "result": False},
-        "ccs": {"name": "没有 CCS 漏洞", "sequence": 8, "result": False},
-        "heartbleed": {"name": "没有 Heartbleed 漏洞", "sequence": 9, "result": False},
+        "tls1_2": {"name": "Support TLS1.2", "sequence": 5, "result": False},
+        "pfs": {"name": "Perfect Forward Secrecy (PFS)", "sequence": 6, "result": False},
+        "ats": {"name": "App Transport Security (ATS)", "sequence": 7, "result": False},
+        "ccs": {"name": "CCS Injection", "sequence": 8, "result": False},
+        "heartbleed": {"name": "HeartBleed", "sequence": 9, "result": False},
     }
     mini_length = 256
     start_time = None
@@ -94,7 +93,7 @@ def run(url):
                     mini_length = 2048
             if result_list[0] == "Key Size":
                 if int(result_list[1]) >= mini_length:
-                    result_map["pub"]["result"] = True
+                    result_map["public"]["result"] = True
             if result_list[0] == "Signature Algorithm":
                 if result_list[1] == "sha256":
                     result_map["signature"]["result"] = True

@@ -1,0 +1,37 @@
+{% extends base.html %}
+{% block section %}
+<div class="indexLogo">
+  <a href="/">
+    <span class="iconfont">&#xe767;</span><span class="title">ne </span>
+    <span class="iconfont">S</span><span class="title">can</span>
+  </a>
+</div>
+<div class="indexSearchBlock">
+  <select class="scheme">
+    <option value="https://">https://</option>
+    <option value="http://">http://</option>
+  </select>
+  <div class="search">
+    <input class="domain" type="text" name="hostname" placeholder="example.com">
+    <button class="submit" id="submit">
+      <span class="iconfont">&#xece1;</span>
+    </button>
+  </div>
+</div>
+<div class="result dn"></div>
+<div class="loading dn">
+  <div class="panel">
+    <div class="scanner"></div>
+    <ul class="something">
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+    <div class="scanning dots">Scanning</div>
+  </div>
+</div>
+<div class="jump"></div>
+{% end %}

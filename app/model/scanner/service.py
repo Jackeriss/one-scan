@@ -10,8 +10,7 @@ from app.util.thread_pool_util import ThreadPool
 from app.config.const_config import PluginType
 
 
-# No async scanners yet
-# ASYNC_SCANNERS = get_plugins(PluginType.ASYNC_SCANNER)
+ASYNC_SCANNERS = get_plugins(PluginType.ASYNC_SCANNER)
 SYNC_SCANNERS = get_plugins(PluginType.SYNC_SCANNER)
 
 
@@ -23,9 +22,8 @@ class ScannerService(object):
     async def scan(cls, url):
         scan_report = []
         url_info = urlsplit(url)
-        # No async scanners yet
-        # for async_scanner in ASYNC_SCANNERS:
-        #     scan_report.append(await ASYNC_SCANNERS[async_scanner](url_info))
+        for async_scanner in ASYNC_SCANNERS:
+            scan_report.append(await ASYNC_SCANNERS[async_scanner](url_info))
         for sync_scanner in SYNC_SCANNERS:
             scan_report.append(await ThreadPool.async_func(SYNC_SCANNERS[sync_scanner], url_info))
         scan_report.sort(key=lambda x: x.get("sequence", 0))

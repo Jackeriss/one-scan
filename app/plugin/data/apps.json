@@ -129,6 +129,17 @@
       },
       "website": "https://amp-wp.org"
     },
+    "Arc Publishing": {
+      "cats": [
+        1
+      ],
+      "html": "<div [^>]*id=\"pb-root\"",
+      "js": {
+        "Fusion.arcSite": ""
+      },
+      "icon": "Arc-Publishing.svg",
+      "website": "https://www.arcpublishing.com/"
+    },
     "Azure": {
       "cats": [
         62
@@ -190,6 +201,23 @@
       "icon": "AdInfinity.png",
       "script": "adinfinity\\.com\\.au",
       "website": "http://adinfinity.com.au"
+    },
+    "AdOcean": {
+      "cats": [
+        36
+      ],
+      "icon": "AdOcean.png",
+      "implies": "Gemius",
+      "js": {
+        "ado.master": "",
+        "ado.slave": "",
+        "ado.placement": ""
+      },
+      "script": [
+        "adocean\\.pl/files/js/ado\\.js",
+        "adocean\\.pl\\;confidence:0.8"
+      ],
+      "website": "https://adocean-global.com"
     },
     "AdRiver": {
       "cats": [
@@ -398,6 +426,15 @@
       },
       "script": "(?:ad\\.advertstream\\.com|adxcore\\.com)",
       "website": "http://www.advertstream.com"
+    },
+    "Adverticum": {
+      "cats": [
+        36
+      ],
+      "icon": "Adverticum.svg",
+      "script": "(?:ad\\.)?adverticum\\.net/g3\\.js",
+      "html": "<div (?:id=\"[a-zA-Z0-9_]*\" )?class=\"goAdverticum\"",
+      "website": "http://adverticum.net"
     },
     "Adyen": {
       "cats": [
@@ -1102,6 +1139,14 @@
       "script": "^https?://edge\\.avangate\\.net/",
       "website": "http://avangate.com"
     },
+    "Avasize": {
+      "cats": [
+        5
+      ],
+      "icon": "Avasize.png",
+      "script": "^https?://cdn\\.avasize\\.com/",
+      "website": "https://www.avasize.com"
+    },
     "Awesomplete": {
       "cats": [
         29
@@ -1431,6 +1476,15 @@
       ],
       "script": "bootstrap-table(?:\\.min)?\\.js",
       "website": "http://bootstrap-table.wenzhixin.net.cn/"
+    },
+    "ClickFunnels": {
+      "cats": [
+        32
+      ],
+      "env": "Clickfunnels",
+      "script": "clickfunnels\\.com",
+      "icon": "ClickFunnels.png",
+      "website": "https://www.clickfunnels.com"
     },
     "Bounce Exchange": {
       "cats": [
@@ -1857,6 +1911,14 @@
       },
       "script": "scripts\\.chitika\\.net/",
       "website": "http://chitika.com"
+    },
+    "Chorus": {
+      "cats": [
+        1
+      ],
+      "icon": "Chorus.png",
+      "html": "<meta data-chorus-version=",
+      "website": "https://getchorus.voxmedia.com/"
     },
     "Ckan": {
       "cats": [
@@ -3189,12 +3251,9 @@
         18,
         59
       ],
+      "html": "<[^<]+class=\"[^\"]*[^-](?:e-control|e-lib)",
       "icon": "syncfusion.svg",
-      "website": "https://www.syncfusion.com/javascript-ui-controls",
-      "js": {
-        "ej.base": ""
-      },
-      "html": "<[^<]* class=\"[^<]*\be-control\b[^-][^<]*\be-lib\b[^>]*\"[^>]*>"
+      "website": "https://www.syncfusion.com/javascript-ui-controls"
     },
     "Etherpad": {
       "cats": [
@@ -3533,6 +3592,7 @@
       ],
       "html": [
         "<link[^>]* href=[^>]+(?:([\\d.]+)/)?(?:css/)?font-awesome(?:\\.min)?\\.css\\;version:\\1",
+        "<link[^>]* href=\"https://use\\.fontawesome\\.com/releases/v([^>]+)/css/\\;version:\\1",
         "<script[^>]* src=[^>]+fontawesome(?:\\.js)?"
       ],
       "icon": "Font Awesome.png",
@@ -3753,6 +3813,25 @@
         "_gauges": ""
       },
       "website": "https://get.gaug.es"
+    },
+    "Gemius": {
+      "cats": [
+        10
+      ],
+      "icon": "Gemius.png",
+      "js": {
+        "pp_gemius_hit": "",
+        "gemius_init": "",
+        "gemius_hit": "",
+        "gemius_pending": ""
+      },
+      "script": [
+        "hit\\.gemius\\.pl/xgemius\\.js",
+        "hit\\.gemius\\.pl\\;confidence:0.8",
+        "xgemius\\.js\\;confidence:0.3"
+      ],
+      "html": "<a [^>]*onclick=\"gemius_hit",
+      "website": "https://www.gemius.com"
     },
     "Gentoo": {
       "cats": [
@@ -4802,6 +4881,16 @@
       "icon": "Incapsula.png",
       "website": "http://www.incapsula.com"
     },
+    "PageCDN": {
+      "cats": [
+        31
+      ],
+      "headers": {
+        "X-CDN": "PageCDN"
+      },
+      "icon": "PageCDN.png",
+      "website": "https://pagecdn.com"
+    },
     "Includable": {
       "cats": [
         18
@@ -5691,7 +5780,7 @@
       "headers": {
         "Liferay-Portal": "[a-z\\s]+([\\d.]+)\\;version:\\1"
       },
-      "icon": "Liferay.png",
+      "icon": "Liferay.svg",
       "js": {
         "Liferay": ""
       },
@@ -5844,7 +5933,9 @@
         53
       ],
       "icon": "LiveHelp.png",
-      "script": "^https?://server\\.livehelp\\.it/widgetjs/[0-9]{5}/[0-9]{1,3}\\.js",
+      "js": {
+        "LHready": ""
+      },
       "website": "http://www.livehelp.it"
     },
     "LiveJournal": {
@@ -6277,7 +6368,7 @@
       "cookies": {
         "PIWIK_SESSID": ""
       },
-      "icon": "Piwik.png",
+      "icon": "Matomo.png",
       "js": {
         "Matomo": "",
         "Piwik": "",
@@ -6289,7 +6380,7 @@
         "google-play-app": "app-id=org\\.piwik\\.mobile2"
       },
       "script": "piwik\\.js|piwik\\.php",
-      "website": "http://piwik.org"
+      "website": "https://matomo.org"
     },
     "Mattermost": {
       "cats": [
@@ -6429,6 +6520,22 @@
         "powered-by": "^Melis CMS"
       },
       "website": "http://www.melistechnology.com/"
+    },
+    "MemberStack": {
+      "cats": [
+        6,
+        47
+      ],
+      "icon": "MemberStack.png",
+      "cookies": {
+        "memberstack": ""
+      },
+      "js": {
+        "MemberStack": ""
+      },
+      "script": "memberstack\\.js",
+      "url": "^https?//.+\\.memberstack\\.io",
+      "website": "https://www.memberstack.io"
     },
     "Mermaid": {
       "cats": [
@@ -7377,6 +7484,15 @@
       },
       "website": "http://open-eshop.com/"
     },
+    "OpenBSD httpd": {
+      "cats": [
+        22
+      ],
+      "headers": {
+        "Server": "^OpenBSD httpd"
+      },
+      "website": "https://man.openbsd.org/httpd.8"
+    },
     "OpenCart": {
       "cats": [
         6
@@ -7614,6 +7730,24 @@
         "generator": "Orchard"
       },
       "website": "http://orchardproject.net"
+    },
+    "OroCommerce": {
+      "cats": [
+        6
+      ],
+      "html": [
+        "<script [^>]+data-requiremodule=\"oro/",
+        "<script [^>]+data-requiremodule=\"oroui/"
+      ],
+      "icon": "orocommerce.svg",
+      "implies": [
+        "PHP",
+        "MySQL"
+      ],
+      "script": [
+        "oro\\.min\\.js\\?version=([\\d.]+)\\;version:\\1"
+      ],
+      "website": "https://oroinc.com"
     },
     "Outbrain": {
       "cats": [
@@ -8784,9 +8918,9 @@
         "Symfony"
       ],
       "meta": {
-        "generator": "^Roadiz ([a-z0-9\\s\\.]+) - \\;version:\\1"
+        "generator": "^Roadiz ?(?:master|develop)? v?([0-9\\.]+)\\;version:\\1"
       },
-      "website": "http://www.roadiz.io"
+      "website": "https://www.roadiz.io"
     },
     "Robin": {
       "cats": [
@@ -8907,6 +9041,39 @@
       "icon": "SAP.png",
       "website": "http://sap.com"
     },
+    "Sapper": {
+      "cats": [
+        18
+      ],
+      "html": [
+        "<script[^>]*>__SAPPER__"
+      ],
+      "icon": "Sapper.svg",
+      "js": {
+        "__SAPPER__": ""
+      },
+      "implies": [
+        "Svelte",
+        "Node.js"
+      ],
+      "website": "https://sapper.svelte.dev"
+    },
+    "Scenari": {
+      "cats": [
+        1,
+        11
+      ],
+      "icon": "Scenari.png",
+      "implies": [
+        "Roadiz CMS",
+        "PHP",
+        "Symfony"
+      ],
+      "meta": {
+        "generator": "^Roadiz ?(?:master|develop)? v?[0-9\\.]+ - Scenari v?([0-9\\.]+)\\;version:\\1"
+      },
+      "website": "https://demo.scenari.site"
+    },
     "SDL Tridion": {
       "cats": [
         1
@@ -8937,6 +9104,7 @@
       ],
       "html": "<script[^>]*>\\s*Raven\\.config\\('[^']*', {\\s+release: '([0-9\\.]+)'\\;version:\\1",
       "js": {
+        "__SENTRY__": "",
         "Sentry": "",
         "Sentry.SDK_VERSION": "(.+)\\;version:\\1",
         "Raven.config": "",
@@ -10068,7 +10236,7 @@
       "cats": [
         12
       ],
-      "html": "<[^>]+class=\"[^\"]*svelte-",
+      "html": "<[^>]+class=\\\"[^\\\"]+\\ssvelte-[\\w]*\\\"",
       "icon": "Svelte.svg",
       "website": "https://svelte.dev"
     },
@@ -11256,6 +11424,20 @@
       "script": "web2py\\.js",
       "website": "http://web2py.com"
     },
+    "Webflow": {
+      "cats": [
+        51
+      ],
+      "html": "<html[^>]+data-wf-site",
+      "icon": "webflow.svg",
+      "js": {
+        "Webflow": ""
+      },
+      "meta": {
+        "generator": "Webflow"
+      },
+      "website": "https://webflow.com"
+    },
     "WebGUI": {
       "cats": [
         1
@@ -11456,6 +11638,14 @@
       },
       "script": "cdn\\.6th\\.ir",
       "website": "https://webzi.ir"
+    },
+    "Whooshkaa": {
+      "cats": [
+        5
+      ],
+      "html": "<iframe src=\"[^>]+whooshkaa\\.com",
+      "icon": "Whooshkaa.svg",
+      "website": "https://www.whooshkaa.com"
     },
     "Wikinggruppen": {
       "cats": [
@@ -13478,35 +13668,43 @@
       },
       "icon": "RXWeb.svg",
       "website": "http://developers.rokitax.co.uk/projects/rxweb"
+    },
+    "Tencent Waterproof Wall": {
+      "cats": [
+        9
+      ],
+      "icon": "TencentWaterproofWall.png",
+      "script": "/TCaptcha\\.js",
+      "website": "https://007.qq.com/"
     }
   },
   "categories": {
     "1": {
-      "name": "内容管理系统（CMS）",
+      "name": "CMS",
       "priority": 1
     },
     "2": {
-      "name": "留言板",
+      "name": "Message Boards",
       "priority": 1
     },
     "3": {
-      "name": "数据库管理器",
+      "name": "Database Managers",
       "priority": 2
     },
     "4": {
-      "name": "文档工具",
+      "name": "Documentation Tools",
       "priority": 2
     },
     "5": {
-      "name": "插件",
+      "name": "Widgets",
       "priority": 9
     },
     "6": {
-      "name": "电子商务",
+      "name": "Ecommerce",
       "priority": 1
     },
     "7": {
-      "name": "图床",
+      "name": "Photo Galleries",
       "priority": 1
     },
     "8": {
@@ -13514,223 +13712,223 @@
       "priority": 1
     },
     "9": {
-      "name": "主机面板",
+      "name": "Hosting Panels",
       "priority": 1
     },
     "10": {
-      "name": "分析",
+      "name": "Analytics",
       "priority": 9
     },
     "11": {
-      "name": "博客",
+      "name": "Blogs",
       "priority": 1
     },
     "12": {
-      "name": "JavaScript 框架",
+      "name": "JavaScript Frameworks",
       "priority": 8
     },
     "13": {
-      "name": "Issue 跟踪",
+      "name": "Issue Trackers",
       "priority": 2
     },
     "14": {
-      "name": "视频播放器",
+      "name": "Video Players",
       "priority": 7
     },
     "15": {
-      "name": "评论系统",
+      "name": "Comment Systems",
       "priority": 9
     },
     "16": {
-      "name": "人机验证",
+      "name": "Captchas",
       "priority": 9
     },
     "17": {
-      "name": "字体",
+      "name": "Font Scripts",
       "priority": 9
     },
     "18": {
-      "name": "Web 框架",
+      "name": "Web Frameworks",
       "priority": 7
     },
     "19": {
-      "name": "杂项",
+      "name": "Miscellaneous",
       "priority": 9
     },
     "20": {
-      "name": "编辑器",
+      "name": "Editors",
       "priority": 4
     },
     "21": {
-      "name": "学习管理系统",
+      "name": "LMS",
       "priority": 1
     },
     "22": {
-      "name": "Web 服务器",
+      "name": "Web Servers",
       "priority": 8
     },
     "23": {
-      "name": "缓存工具",
+      "name": "Cache Tools",
       "priority": 7
     },
     "24": {
-      "name": "富文本编辑器",
+      "name": "Rich Text Editors",
       "priority": 5
     },
     "25": {
-      "name": "JavaScript 图形库",
+      "name": "JavaScript Graphics",
       "priority": 6
     },
     "26": {
-      "name": "移动端框架",
+      "name": "Mobile Frameworks",
       "priority": 8
     },
     "27": {
-      "name": "编程语言",
+      "name": "Programming Languages",
       "priority": 5
     },
     "28": {
-      "name": "操作系统",
+      "name": "Operating Systems",
       "priority": 6
     },
     "29": {
-      "name": "搜索引擎",
+      "name": "Search Engines",
       "priority": 4
     },
     "30": {
-      "name": "邮箱",
+      "name": "Web Mail",
       "priority": 2
     },
     "31": {
-      "name": "内容分发网络（CDN）",
+      "name": "CDN",
       "priority": 9
     },
     "32": {
-      "name": "营销自动化",
+      "name": "Marketing Automation",
       "priority": 9
     },
     "33": {
-      "name": "服务器插件",
+      "name": "Web Server Extensions",
       "priority": 7
     },
     "34": {
-      "name": "数据库",
+      "name": "Databases",
       "priority": 5
     },
     "35": {
-      "name": "地图",
+      "name": "Maps",
       "priority": 6
     },
     "36": {
-      "name": "广告",
+      "name": "Advertising Networks",
       "priority": 9
     },
     "37": {
-      "name": "网络设备",
+      "name": "Network Devices",
       "priority": 2
     },
     "38": {
-      "name": "媒体服务器",
+      "name": "Media Servers",
       "priority": 1
     },
     "39": {
-      "name": "网络摄像头",
+      "name": "Webcams",
       "priority": 9
     },
     "41": {
-      "name": "支付",
+      "name": "Payment Processors",
       "priority": 8
     },
     "42": {
-      "name": "标签管理器",
+      "name": "Tag Managers",
       "priority": 9
     },
     "44": {
-      "name": "持续集成系统",
+      "name": "Build CI Systems",
       "priority": 3
     },
     "45": {
-      "name": "控制系统",
+      "name": "Control Systems",
       "priority": 2
     },
     "46": {
-      "name": "远程访问",
+      "name": "Remote Access",
       "priority": 1
     },
     "47": {
-      "name": "开发工具",
+      "name": "Dev Tools",
       "priority": 2
     },
     "48": {
-      "name": "网络存储",
+      "name": "Network Storage",
       "priority": 2
     },
     "49": {
-      "name": "源订阅器",
+      "name": "Feed Readers",
       "priority": 1
     },
     "50": {
-      "name": "文档管理系统",
+      "name": "Document Management Systems",
       "priority": 1
     },
     "51": {
-      "name": "落地页生成器",
+      "name": "Landing Page Builders",
       "priority": 2
     },
     "52": {
-      "name": "在线聊天",
+      "name": "Live Chat",
       "priority": 8
     },
     "53": {
-      "name": "客户关系管理（CRM）",
+      "name": "CRM",
       "priority": 5
     },
     "54": {
-      "name": "搜索引擎优化（SEO）",
+      "name": "SEO",
       "priority": 8
     },
     "55": {
-      "name": "会计",
+      "name": "Accounting",
       "priority": 1
     },
     "56": {
-      "name": "挖矿软件",
+      "name": "Cryptominer",
       "priority": 5
     },
     "57": {
-      "name": "静态网站生成器",
+      "name": "Static Site Generator",
       "priority": 1
     },
     "58": {
-      "name": "用户引导",
+      "name": "User Onboarding",
       "priority": 8
     },
     "59": {
-      "name": "JavaScript 库",
+      "name": "JavaScript Libraries",
       "priority": 9
     },
     "60": {
-      "name": "容器",
+      "name": "Containers",
       "priority": 8
     },
     "61": {
-      "name": "软件即服务（SaaS）",
+      "name": "SaaS",
       "priority": 8
     },
     "62": {
-      "name": "平台即服务（PaaS）",
+      "name": "PaaS",
       "priority": 8
     },
     "63": {
-      "name": "基础设施即服务（IaaS）",
+      "name": "IaaS",
       "priority": 8
     },
     "64": {
-      "name": "反向代理",
+      "name": "Reverse Proxy",
       "priority": 7
     },
     "65": {
-      "name": "负载均衡",
+      "name": "Load Balancer",
       "priority": 7
     }
   }

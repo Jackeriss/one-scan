@@ -41,7 +41,7 @@ class HTTPClient:
                 response = await func(url, timeout=timeout, **kwargs)
                 response.text_data = await response.text()
                 if format == "json":
-                    response.json_data = await orjson.loads(response.text_data)
+                    response.json_data = orjson.loads(response.text_data)
             except asyncio.TimeoutError:
                 logging.error(f"request timeout {timeout}!request url:{url} kwargs:{kwargs}")
                 break

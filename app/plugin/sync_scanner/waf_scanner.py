@@ -1,10 +1,9 @@
-""" 扫描 WAF 服务商 """
 from wafw00f.main import WafW00F
 from wafw00f.lib.evillib import oururlparse
 
 
-__plugin__ = "WAF 扫描器"
-SEQUENCE = 5
+__plugin__ = "WAF Scanner"
+SEQUENCE = 6
 
 
 def run(url):
@@ -18,15 +17,15 @@ def run(url):
         "sequence": SEQUENCE,
         "result": [],
     }
-    error_result["result"] = [{"name": "错误", "result": f"{__plugin__}无法扫描该网站"}]
-    result_map = {"waf": {"name": "WAF 服务商", "sequence": 0, "result": []}}
+    error_result["result"] = [{"name": "Error", "result": [{"name": f"{__plugin__} can't scan this website"}]}]
+    result_map = {"waf": {"name": "WAF Provider", "sequence": 0, "result": []}}
 
     try:
         hostname, port, path, _, ssl = oururlparse(url.geturl())
         if not hostname:
             return error_result
         wafw00f_scanner = WafW00F(hostname, port=port, ssl=ssl, path=path)
-        result_map["waf"]["result"] = wafw00f_scanner.identwaf()
+        result_map["waf"]["result"] = wafw00f_scanner.identwaf() or ["Unknown"]
     except:
         return error_result
 
