@@ -28,7 +28,7 @@ def run(url):
         registered_domain = tldextract.extract(url.netloc).registered_domain
         if not registered_domain:
             return error_result
-        domain = whois.whois(registered_domain, command=True)
+        domain = whois.whois(registered_domain)
         result_map["name"]["result"] = [{"name": domain.name or NOT_FOUND}]
         result_map["emails"]["result"] = [{"name": domain.emails or NOT_FOUND}]
         result_map["registrar"]["result"] = [{"name": domain.registrar or NOT_FOUND}]
