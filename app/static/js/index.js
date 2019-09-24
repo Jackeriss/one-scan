@@ -100,12 +100,12 @@ $(function () {
           showResult()
         }
         else {
-          $('.result').html('<div class="error">Please check your url and try again.</div>')
+          $('.result').html('<div class="error">Sorry, we can not connect to this website now.</div>')
           showResult()
         }
       },
       error: function () {
-        $('.result').html('<div class="error">Please check your url and try again.</div>')
+        $('.result').html('<div class="error">Sorry, we can not connect to this website now.</div>')
         showResult()
       }
     })
