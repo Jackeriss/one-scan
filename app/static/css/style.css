@@ -24,6 +24,7 @@ html {
   color: #fff;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
+  min-width: 720px;
 }
 
 body {
@@ -234,14 +235,14 @@ h2 {
 }
 
 .sub {
-  min-width: 700px;
+  min-width: 2;
   font-size: 18px;
   text-align: center;
   padding: 10px 0;
 }
 
 .scannerResult {
-  width: 700px;
+  width: 2;
   padding: 10px;
   vertical-align: middle;
 }
