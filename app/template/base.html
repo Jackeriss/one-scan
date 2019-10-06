@@ -7,7 +7,7 @@
     <meta name="keywords" content="One Scan">
     <title>{% block title %}One Scan{% end %}</title>
     <link href="/css/style.css" rel="stylesheet">
-    <link href="https://cdn.bootcss.com/jquery-nice-select/1.1.0/css/nice-select.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-nice-select@1/css/nice-select.min.css">
     <link href="/image/logo.png" rel="apple-touch-icon-precomposed" sizes="144x144">
     <link href="/image/logo.png" rel="shortcut icon">
     {% block head %}{% end %}
@@ -33,8 +33,7 @@
         </p>
       </div>
     </footer>
-    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdn.bootcss.com/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/combine/npm/jquery@3,npm/jquery-nice-select@1"></script>
     <script src="/js/index.js"></script>
     {% block script %}{% end %}
   </body>
