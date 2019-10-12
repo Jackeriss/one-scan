@@ -18,11 +18,11 @@
 }
 
 ::selection {
-  background: #FFB6E5; /* WebKit/Blink Browsers */
+  background: rgba(253, 138, 211, .2); /* WebKit/Blink Browsers */
 }
 
 ::-moz-selection {
-  background: #FFB6E5; /* Gecko Browsers */
+  background: rgba(253, 138, 211, .2); /* Gecko Browsers */
 }
 
 html {
