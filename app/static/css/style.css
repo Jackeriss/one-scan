@@ -17,6 +17,14 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+::selection {
+  background: #FFB6E5; /* WebKit/Blink Browsers */
+}
+
+::-moz-selection {
+  background: #FFB6E5; /* Gecko Browsers */
+}
+
 html {
   overflow-x: initial !important;
   font-size: 14px;
