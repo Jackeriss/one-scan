@@ -11,10 +11,8 @@ def get_plugins(plugin_type):
     if plugin_path not in sys.path:
         sys.path.insert(0, plugin_path)
     for file_name in file_list:
-        if ".py" in file_name:
+        if file_name.endswith(".py"):
             if file_name == "__init__.py":
-                continue
-            if ".pyc" in file_name:
                 continue
             module_name = f"app.plugin.{plugin_type}.{file_name[:-3]}"
             plugin = __import__(module_name, globals(), locals(), ["run", "__plugin__"])
