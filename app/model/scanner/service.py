@@ -7,7 +7,7 @@ from app.util.time_util import timeout_log
 from app.util.cache_util import local_cache
 from app.util.plugin_util import get_plugins
 from app.util.thread_pool_util import ThreadPool
-from app.config.const_config import PluginType
+from app.config.constant import PluginType
 
 
 ASYNC_SCANNERS = get_plugins(PluginType.ASYNC_SCANNER)
