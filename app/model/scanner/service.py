@@ -1,17 +1,15 @@
 import time
 from urllib.parse import urlsplit
 
-import aiotask_context
-
 from app.util.time_util import timeout_log
 from app.util.cache_util import local_cache
 from app.util.plugin_util import get_plugins
 from app.util.thread_pool_util import ThreadPool
-from app.config.constant import PluginType
+from app.constant import constant
 
 
-ASYNC_SCANNERS = get_plugins(PluginType.ASYNC_SCANNER)
-SYNC_SCANNERS = get_plugins(PluginType.SYNC_SCANNER)
+ASYNC_SCANNERS = get_plugins(constant.PluginType.ASYNC_SCANNER)
+SYNC_SCANNERS = get_plugins(constant.PluginType.SYNC_SCANNER)
 
 
 class ScannerService(object):

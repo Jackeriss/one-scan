@@ -5,5 +5,3 @@ __pycache__
 node_modules
 dist
 app/config/config.local.yaml
-*.sqlite
-qcloud.json

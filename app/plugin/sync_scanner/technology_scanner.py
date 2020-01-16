@@ -294,9 +294,9 @@ def run(url):
     error_result = {"name": __plugin__, "sequence": SEQUENCE, "result": []}
     error_result["result"] = [{"name": "Error", "result": [{"name": f"{__plugin__} can't scan this website"}]}]
 
-    webpage = WebPage.new_from_url(url.geturl(), timeout=config.http["timeout"])
+    webpage = WebPage.new_from_url(url.geturl(), timeout=5)
     try:
-        webpage = WebPage.new_from_url(url.geturl(), timeout=config.http["timeout"])
+        webpage = WebPage.new_from_url(url.geturl(), timeout=5)
         result_map = SCANNER.analyze_with_categories(webpage) or {"": {"name": "Technology", "sequence": 0, "result": [{"name": "Unknown"}]}}
     except:
         return error_result

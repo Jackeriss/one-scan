@@ -1,3 +1,4 @@
+import os
 import logging
 import sys
 import asyncio
@@ -7,7 +8,6 @@ from tornado.log import enable_pretty_logging
 from tornado.platform.asyncio import AsyncIOMainLoop
 from tornado.process import fork_processes
 from tornado.netutil import bind_sockets
-import requests_cache
 
 from app import application, router
 from app.hook import before_hook, after_hook
@@ -22,14 +22,13 @@ root_logger = logging.getLogger()
 if debug:
     root_logger.setLevel(logging.DEBUG)
 else:
-    root_logger.setLevel(logging.INFO)
+    root_logger.setLevel(logging.WARNING)
 
 
 BEFORE_HOOKS = [before_hook.wrap_handler]
 
 AFTER_HOOKS = [
-    # after_hook.init_redis_pool
-    # after_hook.init_pg_pool
+    after_hook.init_redis_pool
 ]
 
 DELAY_TASKS = []
@@ -42,9 +41,6 @@ MODEL_ROUTERS = [{"routers": router.ROUTERS, "prefix": ""}]
 
 
 def main():
-    requests_cache.install_cache(
-        "requests_cache", expire_after=config.server["requests_cache"]
-    )
     settings = config.server
     settings["static_path"] = config.static_path
     settings["template_path"] = config.template_path
@@ -56,8 +52,6 @@ def main():
         import uvloop
 
         asyncio.set_event_loop_policy(uvloop.EventLoopPolicy())
-
-    fork_processes(0 if config.env != "dev" else 1)
 
     AsyncIOMainLoop().install()
     loop = asyncio.get_event_loop()

@@ -25,7 +25,7 @@ async def run(url):
 
     try:
         params = {"domain": url.netloc, "apikey": API_KEY}
-        response = await http_client.get(URL, params=params, format="json")
+        response = await http_client.get(URL, params=params, response_format="json")
         result_map["subdomain"]["result"] = (
             response.json_data["subdomain"]
             if response.json_data.get("subdomain")

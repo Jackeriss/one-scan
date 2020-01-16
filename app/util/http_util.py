@@ -3,14 +3,12 @@ import functools
 import logging
 
 import aiohttp
-import orjson
+import json
 
 from app.util.config_util import config
 
 
 def as_asyncio_task(func):
-    """ aiohttp 的超时机制需要在 asyncio task 中执行 """
-
     @functools.wraps(func)
     async def _wrapper(self, *args, **kwargs):
         coro = func(self, *args, **kwargs)
@@ -20,7 +18,6 @@ def as_asyncio_task(func):
 
 
 class HTTPClient:
-    """ HTTP 客户端 """
     _session = None
 
     @classmethod
@@ -30,7 +27,9 @@ class HTTPClient:
         return cls._session
 
     @as_asyncio_task
-    async def request(self, url, *, method="GET", format=None, timeout=config.http["timeout"], retry=config.http["retry"], **kwargs):
+    async def request(
+        self, url, *, method="GET", response_format=None, timeout=5, retry=2, **kwargs,
+    ):
         session = await self.get_session()
         func = getattr(session, method.lower())
         logging.debug(f"url: {url} params: {kwargs}")
@@ -40,19 +39,27 @@ class HTTPClient:
             try:
                 response = await func(url, timeout=timeout, **kwargs)
                 response.text_data = await response.text()
-                if format == "json":
-                    response.json_data = orjson.loads(response.text_data)
+                if response_format == "json":
+                    response.json_data = json.loads(response.text_data)
             except asyncio.TimeoutError:
-                logging.error(f"request timeout {timeout}!request url:{url} kwargs:{kwargs}")
+                logging.error(
+                    f"request timeout {timeout}!request url:{url} kwargs:{kwargs}"
+                )
                 break
             except Exception as exception:
-                logging.exception("request failed. retry#{}\nurl:{}\nargs:{}\nresponse:{}\nexception:{}".format(
-                    retry, url, kwargs, response, exception))
+                logging.exception(
+                    "request failed. retry#{}\nurl:{}\nargs:{}\nresponse:{}\nexception:{}".format(
+                        retry, url, kwargs, response, exception
+                    )
+                )
                 continue
             else:
                 if response.status != 200:
-                    logging.warning("response status!=200 response:{} {}\nurl:{}\nargs:{}".format(
-                        response.status, response.text_data, url, kwargs))
+                    logging.warning(
+                        "response status!=200 response:{} {}\nurl:{}\nargs:{}".format(
+                            response.status, response.text_data, url, kwargs
+                        )
+                    )
                 break
         return response
 
