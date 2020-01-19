@@ -1,18 +1,23 @@
 {
-    "apps": [{
-        "name": "one-scan",
-        "script": "/bin/bash",
-        "args": ["-c", "pipenv run serve"],
-        "exec_mode": "fork_mode",
-        "instances": "1",
-        "autorestart": false,
-        "log_file": "/app/log/one-scan/one-scan.log",
-        "time": true,
-        "merge_logs": true,
-        "increment_var": "PORT",
-        "env": {
-            "ENV": "prod",
-            "PORT": 10300
+    "apps": [
+        {
+            "name": "one-scan",
+            "script": "/bin/bash",
+            "args": [
+                "-c",
+                "pipenv run serve"
+            ],
+            "exec_mode": "fork_mode",
+            "instances": "1",
+            "autorestart": false,
+            "log_file": "/app/log/one-scan/one-scan.log",
+            "time": true,
+            "merge_logs": true,
+            "increment_var": "PORT",
+            "env": {
+                "ENV": "prod",
+                "PORT": 10300
+            }
         }
-    }]
+    ]
 }
