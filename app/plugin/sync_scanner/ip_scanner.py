@@ -3,6 +3,8 @@ import re
 import dns.resolver
 from ipwhois import IPWhois
 
+from app.constant.constant import UNKNOWN
+
 
 __plugin__ = "IP Scanner"
 SEQUENCE = 0
@@ -11,7 +13,6 @@ SEQUENCE = 0
 RESOLVER_NAMESERVERS = ["223.5.5.5", "1.1.1.1", "114.114.114.114"]
 RESOLVER_TIMEOUT = 2
 RESOLVER_LIFETIME = 8
-NOT_FOUND = "Unknown"
 
 
 def run(url):
@@ -59,21 +60,21 @@ def run(url):
         asn_code = host_ip_result.get("asn")
         result_map["asn_code"]["result"].append(
             {
-                "name": asn_code if asn_code else NOT_FOUND,
+                "name": asn_code if asn_code else UNKNOWN,
                 "url": f"https://whois.ipip.net/AS{asn_code}" if asn_code else None,
             }
         )
         asn_description = host_ip_result.get("asn_description")
         result_map["asn_description"]["result"].append(
             {
-                "name": asn_description if asn_description else NOT_FOUND,
+                "name": asn_description if asn_description else UNKNOWN,
                 "url": f"https://whois.ipip.net/AS{asn_code}" if asn_code else None,
             }
         )
         asn_country_code = host_ip_result.get("asn_country_code")
         result_map["asn_country_code"]["result"].append(
             {
-                "name": asn_country_code if asn_country_code else NOT_FOUND,
+                "name": asn_country_code if asn_country_code else UNKNOWN,
                 "url": f"https://whois.ipip.net/countries/{asn_country_code}"
                 if asn_country_code
                 else None,
@@ -82,20 +83,20 @@ def run(url):
         asn_cidr = host_ip_result.get("asn_cidr")
         result_map["asn_cidr"]["result"].append(
             {
-                "name": asn_cidr if asn_cidr else NOT_FOUND,
+                "name": asn_cidr if asn_cidr else UNKNOWN,
                 "url": f"https://whois.ipip.net/AS{asn_code}/{asn_cidr}"
                 if asn_code and asn_cidr
                 else None,
             }
         )
         result_map["asn_registry"]["result"].append(
-            {"name": host_ip_result.get("asn_registry", NOT_FOUND)}
+            {"name": host_ip_result.get("asn_registry", UNKNOWN)}
         )
         result_map["asn_date"]["result"].append(
-            {"name": host_ip_result.get("asn_date", NOT_FOUND)}
+            {"name": host_ip_result.get("asn_date", UNKNOWN)}
         )
         result_map["ip_version"]["result"].append(
-            {"name": host_ip_result.get("network", {}).get("ip_version", NOT_FOUND)}
+            {"name": host_ip_result.get("network", {}).get("ip_version", UNKNOWN)}
         )
         scan_result["result"][host_ip] = sorted(
             [item for item in result_map.values()], key=lambda x: x.get("sequence", 0)

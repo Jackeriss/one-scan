@@ -1,12 +1,13 @@
+from datetime import datetime
+
 import tldextract
 import whois
+
+from app.constant.constant import UNKNOWN
 
 
 __plugin__ = "WHOIS Scanner"
 SEQUENCE = 3
-
-
-NOT_FOUND = "Unknown"
 
 
 def run(url):
@@ -20,8 +21,8 @@ def run(url):
         "registrar": {"name": "Registrar", "sequence": 1, "result": []},
         "emails": {"name": "Emails", "sequence": 2, "result": []},
         "dnssec": {"name": "DNSSEC", "sequence": 3, "result": []},
-        "creation_date": {"name": "Creation date", "sequence": 4, "result": []},
-        "expiration_date": {"name": "Expiration date", "sequence": 5, "result": []},
+        "creation_date": {"name": "Creation date (UTC)", "sequence": 4, "result": []},
+        "expiration_date": {"name": "Expiration date (UTC)", "sequence": 5, "result": [],},
     }
 
     try:
@@ -29,34 +30,24 @@ def run(url):
         if not registered_domain:
             return error_result
         domain = whois.whois(registered_domain)
-        result_map["name"]["result"] = [{"name": domain.name or NOT_FOUND}]
-        result_map["emails"]["result"] = [{"name": domain.emails or NOT_FOUND}]
-        result_map["registrar"]["result"] = [{"name": domain.registrar or NOT_FOUND}]
-        result_map["dnssec"]["result"] = [{"name": domain.dnssec or NOT_FOUND}]
+        result_map["name"]["result"] = [{"name": domain.name or UNKNOWN}]
+        result_map["emails"]["result"] = [{"name": domain.emails or UNKNOWN}]
+        result_map["registrar"]["result"] = [{"name": domain.registrar or UNKNOWN}]
+        result_map["dnssec"]["result"] = [{"name": domain.dnssec or UNKNOWN}]
         if isinstance(domain.creation_date, list):
-            result_map["creation_date"]["result"] = [
-                {"name": domain.creation_date[0] if domain.creation_date else NOT_FOUND}
-            ]
+            creation_date = domain.creation_date[0]
         else:
-            result_map["creation_date"]["result"] = [
-                {"name": domain.creation_date or NOT_FOUND}
-            ]
+            creation_date = domain.creation_date.replace("T", "")
+        if isinstance(creation_date, datetime):
+            creation_date = datetime.strftime(creation_date, "%Y-%m-%d %H:%M:%S")
+        result_map["creation_date"]["result"] = [{"name": creation_date or UNKNOWN}]
         if isinstance(domain.expiration_date, list):
-            result_map["expiration_date"]["result"] = [
-                {
-                    "name": domain.expiration_date[0]
-                    if domain.expiration_date
-                    else NOT_FOUND
-                }
-            ]
+            expiration_date = domain.expiration_date[0]
         else:
-            result_map["expiration_date"]["result"] = [
-                {
-                    "name": domain.expiration_date
-                    if domain.expiration_date
-                    else NOT_FOUND
-                }
-            ]
+            expiration_date = domain.expiration_date.replace("T", "")
+        if isinstance(expiration_date, datetime):
+            expiration_date = datetime.strftime(expiration_date, "%Y-%m-%d %H:%M:%S")
+        result_map["expiration_date"]["result"] = [{"name": expiration_date or UNKNOWN}]
     except:
         scan_result["result"] = [
             {

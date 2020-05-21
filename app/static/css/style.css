@@ -1,11 +1,12 @@
 @font-face {
-  font-family: 'iconfont';  /* project id 1361471 */
+  font-family: 'iconfont';
+  /* project id 1361471 */
   src: url('//at.alicdn.com/t/font_1361471_7csrw0cma9l.eot');
   src: url('//at.alicdn.com/t/font_1361471_7csrw0cma9l.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_1361471_7csrw0cma9l.woff2') format('woff2'),
-  url('//at.alicdn.com/t/font_1361471_7csrw0cma9l.woff') format('woff'),
-  url('//at.alicdn.com/t/font_1361471_7csrw0cma9l.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_1361471_7csrw0cma9l.svg#iconfont') format('svg');
+    url('//at.alicdn.com/t/font_1361471_7csrw0cma9l.woff2') format('woff2'),
+    url('//at.alicdn.com/t/font_1361471_7csrw0cma9l.woff') format('woff'),
+    url('//at.alicdn.com/t/font_1361471_7csrw0cma9l.ttf') format('truetype'),
+    url('//at.alicdn.com/t/font_1361471_7csrw0cma9l.svg#iconfont') format('svg');
 }
 
 .iconfont {
@@ -18,11 +19,13 @@
 }
 
 ::selection {
-  background: rgba(253, 138, 211, .2); /* WebKit/Blink Browsers */
+  background: rgba(253, 138, 211, .2);
+  /* WebKit/Blink Browsers */
 }
 
 ::-moz-selection {
-  background: rgba(253, 138, 211, .2); /* Gecko Browsers */
+  background: rgba(253, 138, 211, .2);
+  /* Gecko Browsers */
 }
 
 html {

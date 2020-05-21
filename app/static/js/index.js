@@ -3,7 +3,7 @@ $(function () {
     let scheme = $('.scheme').val()
     let domain = $('.domain').val().split('/')[0]
     let domainReg = /^((?:([a-z0-9]\.|[a-z0-9][a-z0-9\-]{0,61}[a-z0-9])\.)+)([a-z0-9]{2,63}|(?:[a-z0-9][a-z0-9\-]{0,61}[a-z0-9]))\.?$/
-    if (domainReg.test(domain)){
+    if (domainReg.test(domain)) {
       window.location.href = `/?scheme=${scheme}&domain=${domain}`
     } else {
       alert("This domain name is illegal.")
@@ -12,11 +12,11 @@ $(function () {
   function getQueryVariable(variable) {
     let query = window.location.search.substring(1);
     let vars = query.split("&");
-    for (let i=0;i<vars.length;i++) {
+    for (let i = 0; i < vars.length; i++) {
       let pair = vars[i].split("=");
-      if (pair[0] == variable){return pair[1];}
+      if (pair[0] == variable) { return pair[1]; }
     }
-    return(false);
+    return (false);
   }
   function genResultHtml(data) {
     let result = ''
@@ -84,7 +84,7 @@ $(function () {
         if (data.code === 0) {
           let report = data.body.scan_report
           for (let i in report) {
-            jump +=  `<a href="#scanner${i}"><div class="scannerJumpBlock"><span class="iconfont">&#xe767;</span><span class="scannerJump"> ${report[i].name}</span></div></a>`
+            jump += `<a href="#scanner${i}"><div class="scannerJumpBlock"><span class="iconfont">&#xe767;</span><span class="scannerJump"> ${report[i].name}</span></div></a>`
             result += `<a href="#scanner${i}"><div class="scannerNameBlock" id="scanner${i}"><span class="iconfont">&#xe767;</span><span class="scannerName"> ${report[i].name}</span></div></a>`
             if (Object.prototype.toString.call(report[i].result) === '[object Object]') {
               for (let j in report[i].result) {

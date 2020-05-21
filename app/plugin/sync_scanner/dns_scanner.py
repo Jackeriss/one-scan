@@ -4,6 +4,7 @@ import dns.resolver
 import tldextract
 
 from app.plugin.data.dns_provider import DNS_PROVIDER
+from app.constant.constant import UNKNOWN
 
 
 __plugin__ = "DNS Scanner"
@@ -46,7 +47,7 @@ def run(url):
         for dns_provider in DNS_PROVIDER:
             if re.search(f"\\.{dns_provider}", ns_server):
                 providers.append(DNS_PROVIDER[dns_provider])
-    result_map["providers"]["result"] = list(set(providers)) if providers else ["Unknown"]
+    result_map["providers"]["result"] = list(set(providers)) if providers else [UNKNOWN]
     for result in result_map.values():
         result["result"] = [{"name": item} for item in result["result"]]
     scan_result["result"] = sorted(

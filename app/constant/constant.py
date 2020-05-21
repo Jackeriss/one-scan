@@ -7,7 +7,7 @@ from app.util.struct_util import StrEnum
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-HTTP_TIMEOUT = 3
+UNKNOWN = "Unknown"
 
 
 class HTTPCode(IntEnum):

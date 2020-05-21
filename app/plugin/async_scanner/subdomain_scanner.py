@@ -1,7 +1,5 @@
-from wafw00f.main import WafW00F
-from wafw00f.lib.evillib import oururlparse
-
 from util.http_util import http_client
+from app.constant.constant import UNKNOWN
 
 
 __plugin__ = "Subdomain Scanner"
@@ -29,12 +27,12 @@ async def run(url):
         result_map["subdomain"]["result"] = (
             response.json_data["subdomain"]
             if response.json_data.get("subdomain")
-            else ["Unknown"]
+            else [UNKNOWN]
         )
         result_map["domain_siblings"]["result"] = (
             response.json_data["domain_siblings"]
             if response.json_data.get("domain_siblings")
-            else ["Unknown"]
+            else [UNKNOWN]
         )
     except:
         return error_result

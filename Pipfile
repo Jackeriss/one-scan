@@ -10,6 +10,7 @@ serve = "python app/main.py"
 black = "*"
 
 [packages]
+nassl = "*"
 tornado = "*"
 schema = "*"
 uvloop = "*"

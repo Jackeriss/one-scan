@@ -1,1 +1,1 @@
-# template-tornado
+# one-scan
