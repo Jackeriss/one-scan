@@ -222,6 +222,7 @@ h2 {
 .submit .iconfont {
   color: #FF87D4;
   font-size: 24px;
+  background: #fff;
 }
 
 .submit .iconfont:hover {
